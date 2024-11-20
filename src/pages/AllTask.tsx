@@ -15,7 +15,7 @@ export default function AllTask() {
   const { email } = useContext(AppContextData);
   useEffect(() => {
     getTaskDetail();
-  }, [userTask]);
+  }, []);
   const getTaskDetail = async () => {
     try {
       const response = await axios.get("/task/detail");
@@ -35,6 +35,7 @@ export default function AllTask() {
           <div className="flex justify-center">
             <TaskDetailCard
               title={data.title}
+              getTaskDetail={getTaskDetail}
               description={data.description}
               _id={`${data._id}`}
             />

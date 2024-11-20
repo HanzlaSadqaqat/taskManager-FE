@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 interface CardProps {
   title: string;
   description: string;
-
+  getTaskDetail: () => void;
   _id: string;
   //   onEditClick?: () => void; // Function to handle the edit button click
   //   onDeleteClick?: () => void; // Function to handle the delete button click
@@ -28,7 +28,9 @@ const TaskDetailCard: React.FC<CardProps> = (props: CardProps) => {
         description,
         id,
       });
-
+      if (response) {
+        props.getTaskDetail();
+      }
       console.log(response.data);
     } catch (error) {
       const err = error as AxiosError;
@@ -41,9 +43,11 @@ const TaskDetailCard: React.FC<CardProps> = (props: CardProps) => {
   const handleDelete = async () => {
     try {
       const response = await axios.delete(`/task/delete/${props._id}`);
-      console.log(response.data);
-      setDescription(props.description);
-      setTitle(props.title);
+      if (response) {
+        setDescription(props.description);
+        setTitle(props.title);
+        props.getTaskDetail();
+      }
     } catch (error) {
       const err = error as AxiosError;
       console.log(err.response?.data);
