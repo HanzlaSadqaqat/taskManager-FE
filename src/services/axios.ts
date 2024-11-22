@@ -8,7 +8,7 @@ import toast from "../components/Toast";
 
 // Create axios instance
 const api = axios.create({
-  baseURL: import.meta.env.VITE_PUBLIC_API_URL || "http://localhost:5000/api",
+  baseURL: "https://manage-task-be.vercel.app/api",
   //   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
