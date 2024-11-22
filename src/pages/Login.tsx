@@ -1,8 +1,11 @@
 // src/components/Login.js
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { AppContextData } from "../context/AppContext";
+import { authApi } from "../services/authService";
+import GoogleButton from "../components/GoogleButton";
+import GithubButton from "../components/GithubButton";
 
 const Login = () => {
   const { setLoggedIn, setEmail } = useContext(AppContextData);
@@ -13,17 +16,30 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post("/auth/login", {
+      await authApi.login({
         email,
         password,
       });
       setLoggedIn!(true);
       setEmail!(email);
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (error) {
       const err = error as AxiosError;
+      console.log("err", err);
       setIsError(`${err.response?.data}`);
     }
+  };
+  const googleAuth = () => {
+    window.open(
+      `${import.meta.env.VITE_PUBLIC_API_URL}/auth/google/callback`,
+      "_self"
+    );
+  };
+  const githubAuth = () => {
+    window.open(
+      `${import.meta.env.VITE_PUBLIC_API_URL}/auth/github/callback`,
+      "_self"
+    );
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -83,6 +99,10 @@ const Login = () => {
             >
               Sign In
             </button>
+            <div className="flex gap-2 flex-col">
+              <GoogleButton onClick={googleAuth} />
+              <GithubButton onClick={githubAuth} />
+            </div>
           </div>
           <div className="relative top-5">
             Don't have an account yet?
