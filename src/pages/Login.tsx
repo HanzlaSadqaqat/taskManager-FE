@@ -32,7 +32,6 @@ const Login = () => {
     }
   };
   const googleAuth = () => {
-    setLoggedIn!(true);
     window.open(
       `${import.meta.env.VITE_PUBLIC_API_URL}/auth/google/callback`,
       "_self"
@@ -114,6 +113,12 @@ const Login = () => {
               className="text-blue-500 hover:text-blue-700 font-semibold"
             >
               {" Signup"}
+            </Link>
+            <Link
+              to={`${import.meta.env.VITE_PUBLIC_API_URL}/auth/github/callback`}
+              className="text-blue-500 hover:text-blue-700 font-semibold"
+            >
+              {" Signup with Github"}
             </Link>
           </div>
         </form>

@@ -9,9 +9,9 @@ export const router = (isLoggedIn: boolean) => {
     return [
       { path: "/", element: <Login /> },
       { path: "/signup", element: <Signup /> },
-
-      // for only testing purpose i add both public and private routes in a same bundle
       { path: "/dashboard", element: <Task /> },
+
+      // For only testing purpose i add both public and private routes in a same bundle
       { path: "/task", element: <AllTask /> },
       { path: "*", element: <Navigate to={"/dashboard"} /> },
     ];
