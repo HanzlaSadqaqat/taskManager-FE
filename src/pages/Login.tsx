@@ -16,13 +16,15 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await authApi.login({
+      const response = await authApi.login({
         email,
         password,
       });
-      setLoggedIn!(true);
-      setEmail!(email);
-      navigate("/", { replace: true });
+      if (response) {
+        setLoggedIn!(true);
+        setEmail!(email);
+        navigate("/", { replace: true });
+      }
     } catch (error) {
       const err = error as AxiosError;
       console.log("err", err);
@@ -34,6 +36,7 @@ const Login = () => {
       `${import.meta.env.VITE_PUBLIC_API_URL}/auth/google/callback`,
       "_self"
     );
+    setLoggedIn!(true);
   };
   const githubAuth = () => {
     window.open(
@@ -99,10 +102,10 @@ const Login = () => {
             >
               Sign In
             </button>
-            <div className="flex gap-2 flex-col">
-              <GoogleButton onClick={googleAuth} />
-              <GithubButton onClick={githubAuth} />
-            </div>
+          </div>
+          <div className="flex gap-2 flex-col">
+            <GoogleButton onClick={googleAuth} />
+            <GithubButton onClick={githubAuth} />
           </div>
           <div className="relative top-5">
             Don't have an account yet?
