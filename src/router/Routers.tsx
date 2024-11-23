@@ -7,9 +7,13 @@ import { Navigate } from "react-router-dom";
 export const router = (isLoggedIn: boolean) => {
   if (!isLoggedIn) {
     return [
-      { path: "/", element: <Login /> },
+      { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
-      { path: "*", element: <Navigate to={"/"} /> },
+
+      // for only testing purpose i add both public and private routes in a same bundle
+      { path: "/dashboard", element: <Task /> },
+      { path: "/task", element: <AllTask /> },
+      { path: "*", element: <Navigate to={"/dashboard"} /> },
     ];
   } else {
     return [

@@ -32,11 +32,11 @@ const Login = () => {
     }
   };
   const googleAuth = () => {
+    setLoggedIn!(true);
     window.open(
       `${import.meta.env.VITE_PUBLIC_API_URL}/auth/google/callback`,
       "_self"
     );
-    setLoggedIn!(true);
   };
   const githubAuth = () => {
     window.open(
