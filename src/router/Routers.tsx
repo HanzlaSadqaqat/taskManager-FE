@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 export const router = (isLoggedIn: boolean) => {
   if (!isLoggedIn) {
     return [
-      { path: "/login", element: <Login /> },
+      { path: "/", element: <Login /> },
       { path: "/signup", element: <Signup /> },
 
       // for only testing purpose i add both public and private routes in a same bundle
