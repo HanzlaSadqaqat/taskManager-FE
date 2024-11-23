@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useState } from "react";
 import { authApi } from "../services/authService";
 export const Signup: React.FC = () => {
